@@ -1,6 +1,5 @@
-﻿const delimiter = "_____&_____";
-const newModelDelimiter = "M____&_____";
-const newPropDelimiter = "P____&_____";
+﻿// =========================================================== Modal ===========================================================
+
 const openModal = "O";
 const closeModal = "C";
 
@@ -15,6 +14,8 @@ function ToggleModal(main, modal, direction) {
   }
 }
 
+// =========================================================== Toggle Password Show ===========================================================
+
 function TogglePasswordShow(passEle, eleToHide, eleToShow) {
   eleToHide.addClass("hide");
   eleToShow.removeClass("hide");
@@ -26,10 +27,150 @@ function TogglePasswordShow(passEle, eleToHide, eleToShow) {
   }
 }
 
+// =========================================================== Accessibility ===========================================================
+
+// Keyboard accessibility for btns that are <img> elements
+// dynamically generated img btns currently don't get this event
+$(`img[tabindex="0"]`).on("keypress", (event) => {
+  if (event.which === 13) {
+    $(event.target).trigger("click");
+  }
+});
+
+// =========================================================== Misc. ===========================================================
+
+function delay(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
+
+// =========================================================== Pagination ===========================================================
+
+// HTML requirement is to give each page a shared class(no underscores) and a 0 indexed id with that exact class name and an underscore in between ex: register_4.
+// Also, every page should have the hide class except for the one showing on page load
+function getIdIndex(textId) {
+  for (let i = 0; i < textId.length; i++) {
+    if (textId[i] === '_') {
+      const idIndex = textId.substring(i + 1);
+      return parseInt(idIndex);
+    }
+  }
+}
+function paginateClickHandler(direction, namespace) {
+  const openPageId = $(`.${namespace}:not(.hide)`).attr("id");
+  let idIndex = getIdIndex(openPageId);
+
+  if (direction === "left") {
+    idIndex--;
+  }
+  else if (direction === "right") {
+    idIndex++;
+  }
+
+  const newId = namespace + "_" + idIndex;
+
+  // if next page exists, hide all then show the page
+  if ($(`#${newId}`).length > 0) {
+    $(`.${namespace}`).addClass("hide");
+    $(`#${newId}`).removeClass("hide");
+  }
+}
+function paginate(namespace, leftBtnId, rightBtnId) {
+  $(`#${leftBtnId}`).on("click", () => {
+    paginateClickHandler("left", namespace);
+  });
+  $(`#${rightBtnId}`).on("click", () => {
+    paginateClickHandler("right", namespace);
+  });
+}
+
+// =========================================================== Read/Edit Swap ===========================================================
+
+function switchFromReadToEdit(target) {
+  target.parents(".toggle-read-edit").find(".read-data").addClass("hide");
+  target.parents(".toggle-read-edit").find(".edit-data").removeClass("hide");
+}
+
+$(".edit-btn").on("click", (event) => {
+  switchFromReadToEdit($(event.target));
+  $(event.target).addClass("hide");
+});
+
+// =========================================================== Navigation Menu ===========================================================
+
 function HighlightCurrentNavBtn(btnToHighlight) {
   $(".nav-btn").removeClass("nav-highlight");
   btnToHighlight.addClass("nav-highlight");
 }
+
+window.setTimeout(() => {
+  $(".preload").removeClass("preload");
+}, 250);
+
+// side nav
+function toggleNav() {
+  if (sessionStorage.getItem("navState") === "opened") {
+    closeNav();
+  }
+  else if (sessionStorage.getItem("navState") === "closed") {
+    openNav();
+  }
+}
+
+function openNav() {
+  $(".show-nav-btn").removeClass("point-right");
+  $(".show-nav-btn").addClass("point-left");
+  $("nav").removeClass("hide-nav");
+  $(".content-container").css("margin-left", "14vw");
+  $(".content-container").css("width", "84%");
+  sessionStorage.setItem("navState", "opened");
+}
+
+function closeNav() {
+  $(".show-nav-btn").removeClass("point-left");
+  $(".show-nav-btn").addClass("point-right");
+  $("nav").addClass("hide-nav");
+  $(".content-container").css("margin-left", "0vw");
+  $(".content-container").css("width", "100%");
+  sessionStorage.setItem("navState", "closed");
+}
+
+// close nav on pageload if that's the current setting
+if (sessionStorage.getItem("navState") === "closed") {
+  closeNav();
+}
+
+$(".show-nav-btn").on("click", toggleNav);
+
+// Move mobile nav btns from navbar to mobile navbar
+function moveNavBtns() {
+  // if entering mobile mode
+  if ($(window).width() <= 768) {
+    $("#mobileNavContainer").append($("nav").children(".nav-btn"));
+    $("#mobileNavContainer").append($("nav").children(".profile-link"));
+    $("#mobileNavContainer").append($("nav").children(".logout-form"));
+  }
+  // if exiting mobile mode
+  else {
+    $("nav").append($("#mobileNavContainer").children());
+  }
+}
+
+// execute once on each page load
+moveNavBtns();
+
+$(window).on("resize", moveNavBtns);
+
+// Mobile Nav Menu Toggle
+$("#mobileNavBtn").on("click", () => {
+  if ($("#mobileNavContainer").hasClass("slide-mobile-nav")) {
+    $("#mobileNavContainer").removeClass("slide-mobile-nav");
+  }
+  else {
+    $("#mobileNavContainer").addClass("slide-mobile-nav");
+  }
+});
+
+// =========================================================== Table Features ===========================================================
 
 function thSortEvent(tbody, directionFlag, rowNamespace, tdSortClass, sortingFunction) {
   const rowCount = $(`#${tbody}`).children().length;
@@ -112,142 +253,3 @@ function abbreviatedMonthToInt(abbreviatedMonth) {
     case "Dec": return 12;
   }
 }
-
-function delay(time) {
-  return new Promise(resolve => setTimeout(resolve, time));
-}
-
-
-
-// Pagination - the HTML requirement is to give each page a shared class(no underscores) and a 0 indexed id with that exact class name and an underscore in between ex: register_4.
-// Also, every page should have the hide class except for the one showing on page load
-function getIdIndex(textId) {
-  for (let i = 0; i < textId.length; i++) {
-    if (textId[i] === '_') {
-      const idIndex = textId.substring(i + 1);
-      return parseInt(idIndex);
-    }
-  }
-}
-function paginateClickHandler(direction, namespace) {
-  const openPageId = $(`.${namespace}:not(.hide)`).attr("id");
-  let idIndex = getIdIndex(openPageId);
-
-  if (direction === "left") {
-    idIndex--;
-  }
-  else if (direction === "right") {
-    idIndex++;
-  }
-
-  const newId = namespace + "_" + idIndex;
-
-  // if next page exists, hide all then show the page
-  if ($(`#${newId}`).length > 0) {
-    $(`.${namespace}`).addClass("hide");
-    $(`#${newId}`).removeClass("hide");
-  }
-}
-function paginate(namespace, leftBtnId, rightBtnId) {
-  $(`#${leftBtnId}`).on("click", () => {
-    paginateClickHandler("left", namespace);
-  });
-  $(`#${rightBtnId}`).on("click", () => {
-    paginateClickHandler("right", namespace);
-  });
-}
-
-
-
-// JQuery content
-$(function () {
-// Move mobile nav btns from navbar to mobile navbar
-function moveNavBtns() {
-  // if entering mobile mode
-  if ($(window).width() <= 768) {
-    $("#mobileNavContainer").append($("nav").children(".nav-btn"));
-    $("#mobileNavContainer").append($("nav").children(".profile-link"));
-    $("#mobileNavContainer").append($("nav").children(".logout-form"));
-  }
-  // if exiting mobile mode
-  else {
-    $("nav").append($("#mobileNavContainer").children());
-  }
-}
-
-// execute once on each page load
-moveNavBtns();
-
-$(window).on("resize", moveNavBtns);
-
-// Mobile Nav Menu Toggle
-$("#mobileNavBtn").on("click", () => {
-  if ($("#mobileNavContainer").hasClass("slide-mobile-nav")) {
-    $("#mobileNavContainer").removeClass("slide-mobile-nav");
-  }
-  else {
-    $("#mobileNavContainer").addClass("slide-mobile-nav");
-  }
-});
-
-// Keyboard accessibility for btns that are <img> elements
-// dynamically generated img btns currently don't get this event
-
-$(`img[tabindex="0"]`).on("keypress", (event) => {
-  if (event.which === 13) {
-    $(event.target).trigger("click");
-  }
-});
-
-// swap between read and edit fields
-function switchFromReadToEdit(target) {
-  target.parents(".toggle-read-edit").find(".read-data").addClass("hide");
-  target.parents(".toggle-read-edit").find(".edit-data").removeClass("hide");
-}
-
-$(".edit-btn").on("click", (event) => {
-  switchFromReadToEdit($(event.target));
-  $(event.target).addClass("hide");
-});
-
-  window.setTimeout(() => {
-    $(".preload").removeClass("preload");
-  }, 250);
-
-// ------------------------------------------------------------ solution specific ------------------------------------------------------------
-
-  // side nav
-  function toggleNav() {
-    if (sessionStorage.getItem("navState") === "opened") {
-      closeNav();
-    }
-    else if (sessionStorage.getItem("navState") === "closed") {
-      openNav();
-    }
-  }
-
-  function openNav() {
-    $(".show-nav-btn").removeClass("point-right");
-    $(".show-nav-btn").addClass("point-left");
-    $("nav").removeClass("hide-nav");
-    $(".content-container").css("margin-left", "14vw");
-    $(".content-container").css("width", "84%");
-    sessionStorage.setItem("navState", "opened");
-  }
-
-  function closeNav() {
-    $(".show-nav-btn").removeClass("point-left");
-    $(".show-nav-btn").addClass("point-right");
-    $("nav").addClass("hide-nav");
-    $(".content-container").css("margin-left", "0vw");
-    $(".content-container").css("width", "100%");
-    sessionStorage.setItem("navState", "closed");
-  }
-
-  // close nav on pageload if that's the current setting
-  if (sessionStorage.getItem("navState") === "closed") {
-    closeNav();
-  }
-
-  $(".show-nav-btn").on("click", toggleNav);
-});

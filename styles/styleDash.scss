@@ -1,5 +1,7 @@
 ﻿@import "_styleDashMix.scss";
 
+// =========================================================== General Styles ===========================================================
+
 * {
   margin: 0px;
   border-left: 0px;
@@ -17,24 +19,8 @@ html {
 body {
   background-color: $cBackground;
 }
-.preload {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -o-transition: none !important;
-  transition: none !important;
-  opacity: 0%;
-}
 
-.background-img {
-  @include WidthHeight(100vw, 100vh);
-  z-index: $zBackground;
-  position: absolute;
-  pointer-events: none;
-}
-
-input, h1, select, option, textarea {
-  color: black;
-}
+// =========================================================== Utility ===========================================================
 
 .hide {
   width: 1px !important;
@@ -52,6 +38,154 @@ input, h1, select, option, textarea {
   pointer-events: none;
 }
 
+// =========================================================== Table Styles ===========================================================
+
+.status-wrap {
+  @include Flex-Row(center, center, auto, 100%);
+  .Resolved {
+    @include Confirmation(1.4rem);
+    margin: 0vh 0.5vw;
+  }
+  .Progressing {
+    @include Neutral(1.4rem);
+    margin: 0vh 0.5vw;
+  }
+  .Rejected {
+    @include Invalid(1.4rem);
+    margin: 0vh 0.5vw;
+  }
+  .Unaddressed {
+    @include Neutral(1.4rem);
+    margin: 0vh 0.5vw;
+    background-color: gray;
+    div {
+      border: none;
+    }
+  }
+}
+
+// =========================================================== Confirmations ===========================================================
+
+.confirmation-wrap {
+  @include Flex-Col(center, center, 24vw, 30vh);
+  background-color: $cAccBackground;
+  box-shadow: 0 0 0.2rem 0.2rem $cAccBackground;
+  border-radius: 0.6rem;
+  margin: 0vh auto;
+  span {
+    font-size: 1.2rem;
+    width: 80%;
+    text-align: center;
+  }
+  .confirmation {
+    @include Confirmation(6rem);
+    margin-top: 4vh;
+  }
+}
+
+// =========================================================== Element Styles ===========================================================
+
+input, h1, select, option, textarea {
+  color: black;
+}
+
+input {
+  text-indent: 10%;
+  border-radius: 0.4rem;
+  font-size: 1.2rem;
+}
+
+input[type="date"] {
+  text-indent: 5%;
+}
+
+textarea {
+  border-radius: 0.4rem;
+  resize: none;
+  padding: 0.3rem;
+}
+
+select {
+  border-radius: 0.3rem;
+  font-size: 1.2rem;
+}
+
+// =========================================================== Button Styles ===========================================================
+
+.btn {
+  cursor: pointer;
+  transition: filter 0.25s;
+  padding: 0.4rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 1rem;
+  background: $cHighlightSoft;
+}
+.btn:hover {
+  filter: brightness(115%);
+}
+.btn:active {
+  transform: scale(0.94);
+  transform: translateY(5%);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+.text-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+}
+
+// =========================================================== Error Handling ===========================================================
+
+.err-input {
+  border: 0.2rem solid $cWarning;
+  box-shadow: 0 0 0.1rem 0.1rem $cWarning;
+}
+
+.err {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.4rem;
+  background-color: $cTableRow;
+  //transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+// =========================================================== Modals ===========================================================
+
+// <section></section> outside of <main></main>
+.screen-tint {
+  width: 100vw;
+  height: 100vh;
+  display: initial;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: $zScreenTint;
+  transition: opacity 0.3s, background-color 0.3s;
+}
+// applies to main
+.unclickable {
+  pointer-events: none;
+  filter: blur(0.2rem);
+}
+
+// =========================================================== Misc. ===========================================================
+
+.title-wrap {
+  @include Flex-Row(center, center, 100%, 10vh);
+  padding: 5vh 0vw;
+  // solution specific
+  h1 {
+    color: $cWhite;
+  }
+}
+
 .no-js-warning {
   @include Flex-Row(center, center, 100vw, 100vh);
   background-color: black;
@@ -59,7 +193,31 @@ input, h1, select, option, textarea {
   z-index: 999;
 }
 
-// solution specific
+.background-img {
+  @include WidthHeight(100vw, 100vh);
+  z-index: $zBackground;
+  position: absolute;
+  pointer-events: none;
+}
+
+// =========================================================== Scroll Bar ===========================================================
+
+::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0.5rem grey;
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $cHeader;
+  border-radius: 0.5rem;
+}
+
+// =========================================================== Navigation Menu ===========================================================
+
 nav {
   @include Flex-Col(center, flex-start, 15vw, 100vh);
   position: fixed;
@@ -125,8 +283,7 @@ nav {
   margin-left: 14vw;
   transition: margin 0.25s, width 0.25s;
 }
-/*
-  nav {
+nav {
   @include Flex-Row(flex-start, center);
   width: 100vw;
   height: 10vh;
@@ -161,151 +318,16 @@ nav {
   width: 100vw;
   height: 10vh;
 }
-*/
 
-// solution specific
-.status-wrap {
-  @include Flex-Row(center, center, auto, 100%);
-  .Resolved {
-    @include Confirmation(1.4rem);
-    margin: 0vh 0.5vw;
-  }
-  .Progressing {
-    @include Neutral(1.4rem);
-    margin: 0vh 0.5vw;
-  }
-  .Rejected {
-    @include Invalid(1.4rem);
-    margin: 0vh 0.5vw;
-  }
-  .Unaddressed {
-    @include Neutral(1.4rem);
-    margin: 0vh 0.5vw;
-    background-color: gray;
-    div {
-      border: none;
-    }
-  }
+.preload {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+  opacity: 0%;
 }
 
-.title-wrap {
-  @include Flex-Row(center, center, 100%, 10vh);
-  padding: 5vh 0vw;
-  // solution specific
-  h1 {
-    color: $cWhite;
-  }
-}
-
-.btn {
-  cursor: pointer;
-  transition: filter 0.25s;
-  padding: 0.4rem 1rem;
-  font-size: 1.1rem;
-  border-radius: 1rem;
-  background: $cHighlightSoft;
-}
-.btn:hover {
-  filter: brightness(115%);
-}
-.btn:active {
-  transform: scale(0.94);
-  transform: translateY(5%);
-  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
-}
-
-.text-btn {
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 1.1rem;
-}
-
-input {
-  text-indent: 10%;
-  border-radius: 0.4rem;
-  font-size: 1.2rem;
-}
-
-input[type="date"] {
-  text-indent: 5%;
-}
-
-textarea {
-  border-radius: 0.4rem;
-  resize: none;
-  padding: 0.3rem;
-}
-
-select {
-  border-radius: 0.3rem;
-  font-size: 1.2rem;
-}
-// <section></section> outside of <main></main>
-.screen-tint {
-  width: 100vw;
-  height: 100vh;
-  display: initial;
-  position: fixed;
-  top: 0%;
-  left: 0%;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: $zScreenTint;
-  transition: opacity 0.3s, background-color 0.3s;
-}
-// applies to main
-.unclickable {
-  pointer-events: none;
-  filter: blur(0.2rem);
-}
-
-.err-input {
-  border: 0.2rem solid $cWarning;
-  box-shadow: 0 0 0.1rem 0.1rem $cWarning;
-}
-
-.err {
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 0.7rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.4rem;
-  background-color: $cTableRow;
-  //transition: opacity 0.3s;
-  pointer-events: none;
-}
-
-.confirmation-wrap {
-  @include Flex-Col(center, center, 24vw, 30vh);
-  background-color: $cAccBackground;
-  box-shadow: 0 0 0.2rem 0.2rem $cAccBackground;
-  border-radius: 0.6rem;
-  margin: 0vh auto;
-  span {
-    font-size: 1.2rem;
-    width: 80%;
-    text-align: center;
-  }
-  .confirmation {
-    @include Confirmation(6rem);
-    margin-top: 4vh;
-  }
-}
-
-::-webkit-scrollbar {
-  width: 0.7rem;
-}
-
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 0.5rem grey;
-  border-radius: 0.5rem;
-}
-
-::-webkit-scrollbar-thumb {
-  background: $cHeader;
-  border-radius: 0.5rem;
-}
+// =========================================================== Media Queries ===========================================================
 
 @media (max-width: $bmaxMobileSmall) {
   html{ font-size: 10px; }
