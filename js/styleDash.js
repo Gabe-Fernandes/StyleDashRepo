@@ -30,12 +30,13 @@ function TogglePasswordShow(passEle, eleToHide, eleToShow) {
 // =========================================================== Accessibility ===========================================================
 
 // Keyboard accessibility for btns that are <img> elements
-// dynamically generated img btns currently don't get this event
-$(`img[tabindex="0"]`).on("keypress", (event) => {
+// dynamically generated img btns need this event added on creation
+function addKeyboardAccessibility(event) {
   if (event.which === 13) {
     $(event.target).trigger("click");
   }
-});
+}
+$(`img[tabindex="0"]`).on("keypress", addKeyboardAccessibility);
 
 // =========================================================== Misc. ===========================================================
 
