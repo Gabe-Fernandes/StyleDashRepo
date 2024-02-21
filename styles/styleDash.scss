@@ -142,7 +142,7 @@ select {
   background: none;
   border: none;
   font-size: 1.1rem;
-  box-shadow: none;;
+  box-shadow: none;
 }
 
 .img-btn-wrap {
@@ -248,7 +248,7 @@ select {
 
 // =========================================================== Navigation Menu ===========================================================
 
-nav {
+.side-nav {
   @include Flex-Col(center, flex-start, 15vw, 100vh);
   position: fixed;
   transition: left 0.25s;
@@ -261,9 +261,10 @@ nav {
   label {
     margin-bottom: 1vh;
   }
-  #projNavBtn {
+  .nav-item:first-of-type {
     margin-top: 1vh;
   }
+
   .nav-item {
     @include Flex-Row(center, center, 100%, 10%);
     cursor: pointer;
@@ -276,20 +277,11 @@ nav {
       color: $cHighlightSoftTextColor;
     }
   }
+
   .nav-highlight {
     background-color: $cHeader;
   }
-  .logout-btn-wrap {
-    img {
-      @include Img-Round(3rem);
-      border-radius: 0rem;
-      cursor: pointer;
-    }
-    button {
-      background-color: transparent;
-      border: none;
-    }
-  }
+
   .show-nav-btn {
     cursor: pointer;
     position: absolute;
@@ -305,15 +297,24 @@ nav {
     right: -5vw;
   }
 }
+
 .hide-nav {
   left: -17vw;
+}
+.preload {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+  opacity: 0%;
 }
 .content-container {
   width: 84%;
   margin-left: 14vw;
   transition: margin 0.25s, width 0.25s;
 }
-nav {
+
+.top-nav {
   @include Flex-Row(flex-start, center);
   width: 100vw;
   height: 10vh;
@@ -321,7 +322,8 @@ nav {
   font-size: 1.5rem;
   position: fixed;
   z-index: $zNavbar;
-  .nav-btn {
+
+  .nav-item {
     @include Flex-Row(center, center, 18%, 100%);
     text-align: center;
     a {
@@ -337,24 +339,83 @@ nav {
       }
     }
   }
+
   .nav-highlight {
     border-bottom: 0.4rem solid $cHighlightStrong;
     border-radius: 0.4rem;
     margin-bottom: -0.4rem;
   }
 }
-
 .nav-space {
   width: 100vw;
   height: 10vh;
 }
 
-.preload {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -o-transition: none !important;
-  transition: none !important;
-  opacity: 0%;
+.mobile-nav {
+  @include Flex-Col(center, flex-start, 100%, 100%);
+  width: 100vw;
+  height: 10vh;
+  background-color: $cHeader;
+  border: 1px solid black;
+  font-size: 1.5rem;
+  position: fixed;
+  z-index: $zNavbar;
+  transition: height 0.3s;
+
+  img {
+    @include Img-Round(3rem);
+    margin: 1vh 0vw;
+  }
+  label {
+    margin-bottom: 1vh;
+  }
+  .nav-item:first-of-type {
+    margin-top: 1vh;
+  }
+
+  .nav-item {
+    @include Flex-Row(center, center, 100%, 100%);
+    text-align: center;
+    transition: opacity 0.3s;
+    a {
+      @include Flex-Row(center, center, 100%, 100%);
+      transition: transform 0.39s, box-shadow 0.39s, background-color 0.39s;
+      &:hover, &:focus {
+        background-color: $cHighlightSoft;
+        box-shadow: 4px 3px 22px 2px rgba(0,0,0, 0.5);
+        transform: scale(1.02);
+      }
+      &:active {
+        transform: scale(0.94);
+      }
+    }
+  }
+
+  .nav-highlight {
+    background-color: $cHighlightStrong;
+  }
+
+  .mobile-nav-btn {
+    @include Flex-Row(flex-end, center, initial, 10vh);
+    width: 100%;
+    img {
+      @include Img-Round(3rem);
+      cursor: pointer;
+      margin-right: 4vw;
+    }
+  }
+}
+
+.logout-btn-wrap {
+  img {
+    @include Img-Round(3rem);
+    border-radius: 0rem;
+    cursor: pointer;
+  }
+  button {
+    background-color: transparent;
+    border: none;
+  }
 }
 
 // =========================================================== Media Queries ===========================================================

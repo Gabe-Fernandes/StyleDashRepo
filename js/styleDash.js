@@ -142,32 +142,57 @@ if (sessionStorage.getItem("navState") === "closed") {
 
 $(".show-nav-btn").on("click", toggleNav);
 
-// Move mobile nav btns from navbar to mobile navbar
-function moveNavBtns() {
+// --- Mobile Nav ---
+function switchToMobileNav() {
   // if entering mobile mode
   if ($(window).width() <= 768) {
-    $("#mobileNavContainer").append($("nav").children(".nav-btn"));
-    $("#mobileNavContainer").append($("nav").children(".profile-link"));
-    $("#mobileNavContainer").append($("nav").children(".logout-form"));
+    $("nav").removeClass(navClass);
+    $("nav").addClass("mobile-nav");
+    $(".show-nav-btn").addClass("hide");
+
+    $("nav").find("img").not("#mobileNavBtn").addClass("hide");
+    $("nav").find("label").addClass("hide");
+    $("nav").find("a").addClass("hide");
+    $(".nav-item").css("transition", "opacity 0s");
+    $(".nav-item").addClass("hide");
   }
   // if exiting mobile mode
   else {
-    $("nav").append($("#mobileNavContainer").children());
+    $("nav").addClass(navClass);
+    $("nav").removeClass("mobile-nav");
+    $(".show-nav-btn").removeClass("hide");
+
+    $("nav").find("img").not("#mobileNavBtn").removeClass("hide");
+    $("nav").find("label").removeClass("hide");
+    $("nav").find("a").removeClass("hide");
+    $(".nav-item").css("transition", "opacity 0.3s");
+    $(".nav-item").removeClass("hide");
   }
 }
 
-// execute once on each page load
-moveNavBtns();
-
-$(window).on("resize", moveNavBtns);
+$(window).on("resize", switchToMobileNav);
+const navClass = $("nav").hasClass("top-nav") ? "top-nav" : "side-nav";
+switchToMobileNav();
 
 // Mobile Nav Menu Toggle
-$("#mobileNavBtn").on("click", () => {
-  if ($("#mobileNavContainer").hasClass("slide-mobile-nav")) {
-    $("#mobileNavContainer").removeClass("slide-mobile-nav");
+$("#mobileNavBtn").on("click", ()=> {
+  const action = $(".mobile-nav").attr("style") === "height: 50vh;" ? "close" : "open";
+
+  if (action === "open") {
+    $(".mobile-nav").css("height", "50vh");
+    $(".nav-item").css("transition", "opacity 0.3s");
+    $(".nav-item").removeClass("hide");
+    $("nav").find("img").not("#mobileNavBtn").not(".show-nav-btn").removeClass("hide");
+    $("nav").find("label").removeClass("hide");
+    $("nav").find("a").removeClass("hide");
   }
-  else {
-    $("#mobileNavContainer").addClass("slide-mobile-nav");
+  else if (action === "close") {
+    $(".mobile-nav").css("height", "10vh");
+    $(".nav-item").css("transition", "opacity 0s");
+    $(".nav-item").addClass("hide");
+    $("nav").find("img").not("#mobileNavBtn").not(".show-nav-btn").addClass("hide");
+    $("nav").find("label").addClass("hide");
+    $("nav").find("a").addClass("hide");
   }
 });
 
