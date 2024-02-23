@@ -1,7 +1,5 @@
 ﻿// =========================================================== Dropdown With Custom Option ===========================================================
 
-
-
 function customDropdown(event) {
   const dropdown = $(event.target);
   const inputElement = dropdown.siblings(".custom-dropdown-input-wrap").find(".custom-dropdown-input:first");
@@ -41,8 +39,6 @@ function customDropdownArrow(event) {
   selectElement.val(option.val());
 }
 $(".custom-dropdown-arrow").on("click", customDropdownArrow);
-
-
 
 // =========================================================== Modal ===========================================================
 
@@ -194,25 +190,44 @@ function switchToMobileNav() {
   if ($(window).width() <= 768) {
     $("nav").removeClass(navClass);
     $("nav").addClass("mobile-nav");
-    $(".show-nav-btn").addClass("hide");
+    if ($("nav").hasClass("hide-nav")) {
+      $("nav").removeClass("hide-nav");
+      $("nav").addClass("nav-was-hidden");
+    }
 
-    $("nav").find("img").not("#mobileNavBtn").addClass("hide");
-    $("nav").find("label").addClass("hide");
-    $("nav").find("a").addClass("hide");
+    $(".content-container").addClass("was-content-container");
+    $(".content-container").removeClass("content-container");
+
+    $(".show-nav-btn").addClass("hide");
+    $(".mobile-nav").css("transition", "left 0.25s");
+    $(".mobile-nav").css("height", "10vh");
+
+    $("nav").find("img").not("#mobileNavBtn").addClass("squish-nav-item");
+    $("nav").find("label").addClass("squish-nav-item");
+    $("nav").find("a").addClass("squish-nav-item");
     $(".nav-item").css("transition", "opacity 0s");
-    $(".nav-item").addClass("hide");
+    $(".nav-item").addClass("squish-nav-item");
   }
   // if exiting mobile mode
   else {
     $("nav").addClass(navClass);
     $("nav").removeClass("mobile-nav");
-    $(".show-nav-btn").removeClass("hide");
+    if ($("nav").hasClass("nav-was-hidden")) {
+      $("nav").removeClass("nav-was-hidden");
+      $("nav").addClass("hide-nav");
+    }
 
-    $("nav").find("img").not("#mobileNavBtn").removeClass("hide");
-    $("nav").find("label").removeClass("hide");
-    $("nav").find("a").removeClass("hide");
+    $(".was-content-container").addClass("content-container");
+    $(".was-content-container").removeClass("was-content-container");
+
+    $(".show-nav-btn").removeClass("hide");
+    $(".side-nav").css("height", "100vh");
+
+    $("nav").find("img").not("#mobileNavBtn").removeClass("squish-nav-item");
+    $("nav").find("label").removeClass("squish-nav-item");
+    $("nav").find("a").removeClass("squish-nav-item");
     $(".nav-item").css("transition", "opacity 0.3s");
-    $(".nav-item").removeClass("hide");
+    $(".nav-item").removeClass("squish-nav-item");
   }
 }
 
@@ -221,24 +236,26 @@ const navClass = $("nav").hasClass("top-nav") ? "top-nav" : "side-nav";
 switchToMobileNav();
 
 // Mobile Nav Menu Toggle
-$("#mobileNavBtn").on("click", ()=> {
-  const action = $(".mobile-nav").attr("style") === "height: 50vh;" ? "close" : "open";
+$("#mobileNavBtn").on("click", () => {
+  const action = $(".mobile-nav").attr("style").includes("height: 50vh;") ? "close" : "open";
 
   if (action === "open") {
+    $(".mobile-nav").css("transition", "height 0.3s");
     $(".mobile-nav").css("height", "50vh");
     $(".nav-item").css("transition", "opacity 0.3s");
-    $(".nav-item").removeClass("hide");
-    $("nav").find("img").not("#mobileNavBtn").not(".show-nav-btn").removeClass("hide");
-    $("nav").find("label").removeClass("hide");
-    $("nav").find("a").removeClass("hide");
+    $(".nav-item").removeClass("squish-nav-item");
+    $("nav").find("img").not("#mobileNavBtn").not(".show-nav-btn").removeClass("squish-nav-item");
+    $("nav").find("label").removeClass("squish-nav-item");
+    $("nav").find("a").removeClass("squish-nav-item");
   }
   else if (action === "close") {
+    $(".mobile-nav").css("transition", "height 0.3s");
     $(".mobile-nav").css("height", "10vh");
     $(".nav-item").css("transition", "opacity 0s");
-    $(".nav-item").addClass("hide");
-    $("nav").find("img").not("#mobileNavBtn").not(".show-nav-btn").addClass("hide");
-    $("nav").find("label").addClass("hide");
-    $("nav").find("a").addClass("hide");
+    $(".nav-item").addClass("squish-nav-item");
+    $("nav").find("img").not("#mobileNavBtn").not(".show-nav-btn").addClass("squish-nav-item");
+    $("nav").find("label").addClass("squish-nav-item");
+    $("nav").find("a").addClass("squish-nav-item");
   }
 });
 

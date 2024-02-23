@@ -10,6 +10,7 @@
   font-family: "Trebuchet MS", "Times New Roman";
   text-decoration: none;
   color: $cWhite;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -110,8 +111,6 @@ select {
   font-size: 1.2rem;
 }
 
-
-
 // =========================================================== Dropdown With Custom Option ===========================================================
 
 
@@ -127,12 +126,10 @@ select {
   }
 }
 
-
-
 // =========================================================== Button Styles ===========================================================
 
 .btn-wrap {
-  @include Flex-Row(center, center, 100%, 100%);
+  @include Flex-Row(center, center, 100%, initial);
   a, button, input[type=submit] {
     margin: 0vh 1vw;
   }
@@ -415,9 +412,11 @@ select {
   img {
     @include Img-Round(3rem);
     margin: 1vh 0vw;
+    transition: height 0.3s, font-size 0.3s;
   }
   label {
     margin-bottom: 1vh;
+    transition: height 0.3s;
   }
   .nav-item:first-of-type {
     margin-top: 1vh;
@@ -426,10 +425,10 @@ select {
   .nav-item {
     @include Flex-Row(center, center, 100%, 100%);
     text-align: center;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s, height 0.3s;
     a {
       @include Flex-Row(center, center, 100%, 100%);
-      transition: transform 0.39s, box-shadow 0.39s, background-color 0.39s;
+      transition: transform 0.39s, box-shadow 0.39s, background-color 0.39s, font-size 0.3s;
       &:hover, &:focus {
         background-color: $cHighlightSoft;
         box-shadow: 4px 3px 22px 2px rgba(0,0,0, 0.5);
@@ -454,6 +453,12 @@ select {
       margin-right: 4vw;
     }
   }
+
+  .squish-nav-item {
+    height: 0px;
+    min-height: 0px;
+    font-size: 0px;
+  }
 }
 
 .logout-btn-wrap {
@@ -466,6 +471,11 @@ select {
     background-color: transparent;
     border: none;
   }
+}
+
+.was-content-container {
+  width: 100% !important;
+  margin: 0% !important;
 }
 
 // =========================================================== Media Queries ===========================================================
