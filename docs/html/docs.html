@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Dash - Documentation</title>
+  <link rel="stylesheet" href="/dist/styleDash.css">
+  <link rel="stylesheet" href="/dist/docs.css">
+  <script type="text/javascript" src="/js/node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/docs/docs.js"></script>
+  <script defer type="text/javascript" src="/js/styleDash.js"></script>
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="mobile-ele btn text-btn mobile-nav-btn"><img tabindex="0" id="mobileNavBtn" src="/icons/hamburgerMenu_512x512.png"></div>
+    <div class="nav-item">
+      <label><i>Style Dash</i></label>
+    </div>
+    <div class="nav-item">
+      <a href="/docs/index.html">Get Started</a>
+    </div>
+    <div class="nav-item nav-highlight">
+      <a href="#">Docs</a>
+    </div>
+    <div class="nav-item">
+      <a href="/docs/tutorials.html">Tutorials</a>
+    </div>
+  </nav>
+  <div class="nav-space"></div>
+
+  <div class="book-container">
+    <div class="search-wrap">
+      <div class="search-div">
+        <img src="/icons/Search.png" />
+        <input id="bookFilter" type="text" placeholder="search..." />
+      </div>
+    </div>
+    
+    <div id="modalsDiv" class="book" data-tags="modals-popups-windows">
+      <h4>Modals:</h4>
+      <p>A window that appears on screen with a fade transition</p>
+      <a href="/docs/html/book.html"></a>
+    </div>
+    
+    <div id="hideDiv" class="book" data-tags="hide-fade-show-invisible-disappear-transparent">
+      <h4>Hide:</h4>
+      <p>Change the visibility of elements in various ways</p>
+      <a href="/docs/html/book.html"></a>
+    </div>
+
+    <div id="searchWrapDiv" class="book" data-tags="search-wrap-find-lookup-filter">
+      <h4>Search Wrap:</h4>
+      <p>A textbox with an image (usually magnifying glass) in it</p>
+      <a href="/docs/html/book.html"></a>
+    </div>
+  </div>
+</body>
+</html>

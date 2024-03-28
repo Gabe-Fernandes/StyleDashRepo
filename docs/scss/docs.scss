@@ -1,0 +1,36 @@
+@import "../../styles/_styleDashMix.scss";
+
+.search-wrap {
+  @include Flex-Row(center, center, 100%, 10vh);
+  .search-div {
+    @include SearchDiv(1.5rem, 50%, 5vh);
+  }
+}
+
+.book-container {
+  @include Flex-Col(center, center, 85%, initial);
+  margin: 5vh auto;
+  .book {
+    @include Flex-Col(flex-start, center, 90%, 10vh);
+    margin: 2vh 0vw;
+    background-image: linear-gradient(to bottom right, #2B5884, #003870);
+    border-radius: 1rem;
+    border: black solid 0.5px;
+    cursor: pointer;
+    position: relative;
+    transition: filter 0.3s, width 0.3s, height 0.3s;
+    &:hover {
+      @include WidthHeight(91%, 10.3vh);
+      filter: brightness(115%);
+    }
+    h4 {
+      margin-left: 10%;
+    }
+    p {
+      margin: 0% 5% 0% 15%;
+    }
+    a {
+      @include AnchorFillsDiv();
+    }
+  }
+}
