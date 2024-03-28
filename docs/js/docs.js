@@ -16,4 +16,9 @@ $(function () {
       }
     }
   });
+
+  $(".book-link").on("click", (event)=> {
+    const bookId = $(event.target).attr("data-bookId");
+    localStorage.setItem("bookId", bookId);
+  });
 });

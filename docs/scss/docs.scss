@@ -3,7 +3,7 @@
 .search-wrap {
   @include Flex-Row(center, center, 100%, 10vh);
   .search-div {
-    @include SearchDiv(1.5rem, 50%, 5vh);
+    @include SearchDiv(1.5rem, 30%, 5vh);
   }
 }
 

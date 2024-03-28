@@ -6,6 +6,76 @@
   left: 10vw;
 }
 
-p {
-  text-align: center;
+.description-wrap {
+  @include Flex-Row(center, center, 90vw, initial);
+  margin: 2vh auto 4vh auto;
+  border: 1px solid black;
+  background-image: linear-gradient(to bottom right, $cBackground, $cTableRowOff);
+  border-radius: 0.5rem;
+  .visual-wrap {
+    @include Flex-Row(center, center, initial, initial);
+    margin: 2vh 0vw;
+    img {
+      @include WidthHeight(80%, 100%);
+      border-radius: 0.7rem;
+    }
+  }
+  .text-wrap {
+    p {
+      margin: 2vh 0vw;
+      text-align: center;
+    }
+  }
+}
+
+.html-sass-req-wrap {
+  @include Flex-Col(center, center, 90vw, initial);
+  margin: 2vh auto;
+  border: 1px solid black;
+  background-image: linear-gradient(to bottom right, $cBackground, $cTableRowOff);
+  border-radius: 0.5rem;
+  .html-sass-imgs {
+    @include Flex-Row(center, center, initial, initial);
+    margin-top: 3vh;
+    @media (max-width: $bmaxTablet) {
+      flex-direction: column;
+    }
+    img {
+      @include WidthHeight(30vw, 10vh);
+      @media (max-width: $bmaxTablet) {
+        width: 80vw;
+      }
+      margin: 1vh 1vw;
+      border-radius: 0.5rem;
+      transition: width 0.3s;
+    }
+  }
+  .directions-wrap {
+    @include Flex-Col(flex-start, center, 65%, initial);
+    margin: 2vh 0vw;
+    ul {
+      margin: 2vh 0vw;
+    }
+  }
+}
+
+.minor-title {
+  padding: 2vh 0vw;
+}
+
+.implementation-wrap {
+  @include Flex-Col(center, center, 90vw, initial);
+  margin: 2vh auto 8vh auto;
+  border: 1px solid black;
+  background-image: linear-gradient(to bottom right, $cBackground, $cTableRowOff);
+  border-radius: 0.5rem;
+
+  img {
+    @include WidthHeight(40vw, 40vh);
+    @media (max-width: $bmaxTablet) {
+      width: 75vw;
+    }
+    margin: 3vh 0vw;
+    transition: width 0.3s;
+  }
 }

@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/dist/styleDash.css">
   <link rel="stylesheet" href="/dist/book.css">
   <script type="text/javascript" src="/js/node_modules/jquery/dist/jquery.min.js"></script>
-  <script type="text/javascript" src="/docs/docs.js"></script>
+  <script type="text/javascript" src="/docs/js/book.js"></script>
   <script defer type="text/javascript" src="/js/styleDash.js"></script>
 </head>
 <body>
@@ -17,39 +17,55 @@
       <label><i>Style Dash</i></label>
     </div>
     <div class="nav-item">
-      <a href="/docs/index.html">Get Started</a>
+      <a href="/docs/html/index.html">Get Started</a>
     </div>
     <div class="nav-item nav-highlight">
       <a href="/docs/html/docs.html">Docs</a>
     </div>
     <div class="nav-item">
-      <a href="/docs/tutorials.html">Tutorials</a>
+      <a href="/docs/html/tutorials.html">Tutorials</a>
     </div>
   </nav>
   <div class="nav-space"></div>
 
-  <a id="backToDocs" class="btn" href="/docs/html/docs.html#searchWrapDiv">Back</a>
+  <a id="backToDocs" class="btn" href="">Back</a>
 
   <div class="title-wrap">
-    <h1>Search Wrap</h1>
+    <h1 id="bookTitle"></h1>
   </div>
 
-  <div>
-    <p>A textbox with an image (usually magnifying glass) in it</p>
+  <div class="description-wrap">
+    <div class="text-wrap">
+      <p id="bookDescription"></p>
+    </div>
+    <div class="visual-wrap">
+      <img id="visualImg" src="" />
+    </div>
   </div>
 
-  <div>
-    <label>HTML Requirement:</label>
-    <img />
-    <p></p>
+  <div class="title-wrap minor-title">
+    <h2>HTML/SASS Requirements:</h2>
+  </div>
+
+  <div class="html-sass-req-wrap">
+    <div class="html-sass-imgs">
+      <img id="htmlImg" src=""/>
+      <img id="sassImg" src=""/>
+    </div>
+    <div class="directions-wrap">
+      <p>Directions:</p>
+      <ul id="directionsList">
+
+      </ul>
+    </div>
   </div>
   
-<div class="title-wrap">
-  <h2>Examples:</h2>
+<div class="title-wrap minor-title">
+  <h2>Implementation:</h2>
 </div>
 
-<div>
-  
+<div class="implementation-wrap">
+  <img id="implementationImg" src="" />
 </div>
 
 </body>
