@@ -1,6 +1,6 @@
 $(function () {
   const modalData = {
-    callbackUrl: "/docs/html/docs.html#modalsDiv",
+    callbackUrl: "docs/html/docs.html#modalsDiv",
     title: "Modal",
     description: "- A window that appears on screen with a fade transition",
     visualSrc: "/codeImgs/searchWrapVisual.PNG",
@@ -10,7 +10,7 @@ $(function () {
     implementationSrc: "/codeImgs/searchWrapLibSassCode.PNG"
   }
   const hideData = {
-    callbackUrl: "/docs/html/docs.html#hideDiv",
+    callbackUrl: "docs/html/docs.html#hideDiv",
     title: "Hide",
     description: "- Change the visibility of elements in various ways",
     visualSrc: "/codeImgs/searchWrapVisual.PNG",
@@ -20,7 +20,7 @@ $(function () {
     implementationSrc: "/codeImgs/searchWrapLibSassCode.PNG"
   }
   const searchWrapData = {
-    callbackUrl: "/docs/html/docs.html#searchWrapDiv",
+    callbackUrl: "docs/html/docs.html#searchWrapDiv",
     title: "Search Wrap",
     description: "- a textbox with an image (usually magnifying glass) in it",
     visualSrc: "/codeImgs/searchWrapVisual.PNG",
