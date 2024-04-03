@@ -34,21 +34,17 @@
   border: 1px solid black;
   background-image: linear-gradient(to bottom right, $cBackground, $cTableRowOff);
   border-radius: 0.5rem;
-  .html-sass-imgs {
-    @include Flex-Row(center, center, initial, initial);
-    margin-top: 3vh;
+  span {
+    margin: 2vh 0vw;
+  }
+  img {
+    @include WidthHeight(30vw, 40vh);
     @media (max-width: $bmaxTablet) {
-      flex-direction: column;
+      width: 80vw;
     }
-    img {
-      @include WidthHeight(30vw, 10vh);
-      @media (max-width: $bmaxTablet) {
-        width: 80vw;
-      }
-      margin: 1vh 1vw;
-      border-radius: 0.5rem;
-      transition: width 0.3s;
-    }
+    margin: 1vh 1vw;
+    border-radius: 0.5rem;
+    transition: width 0.3s;
   }
   .directions-wrap {
     @include Flex-Col(flex-start, center, 65%, initial);
@@ -75,7 +71,40 @@
     @media (max-width: $bmaxTablet) {
       width: 75vw;
     }
-    margin: 3vh 0vw;
+    margin-bottom: 3vh;
     transition: width 0.3s;
+  }
+
+  span {
+    margin: 2vh 0vw;
+  }
+}
+
+// slideshow ---------------------------------------
+.slideshow-wrap {
+  @include Flex-Row(center, center, 100%, 90%);
+  position: relative;
+  div {
+    @include Flex-Col(center, center, 100%, 100%);
+    transition: width 0.5s, opacity 0.5s;
+  }
+  .slideshow-shrink {
+    width: 0% !important;
+    pointer-events: none;
+    opacity: 0%;
+  }
+  .slideshow-btn {
+    @include Img-Round(4rem);
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+  }
+  .slideshow-left {
+    transform: translate(-50%, -50%) rotate(90deg);
+    left: 3%;
+  }
+  .slideshow-right {
+    transform: translate(-50%, -50%) rotate(-90deg);
+    right: 3%;
   }
 }

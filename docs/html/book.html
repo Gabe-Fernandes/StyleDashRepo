@@ -44,14 +44,17 @@
   </div>
 
   <div class="title-wrap minor-title">
-    <h2>HTML/SASS Requirements:</h2>
+    <h2>HTML/SASS/JS Requirements:</h2>
   </div>
 
   <div class="html-sass-req-wrap">
-    <div class="html-sass-imgs">
-      <img id="htmlImg" src=""/>
-      <img id="sassImg" src=""/>
+    <span id="reqSlideshowCounter"></span>
+
+    <div id="reqSlideshowWrap" class="slideshow-wrap" data-page="1">
+      <img tabindex="0" class="slideshow-btn slideshow-left" src="/icons/FileDirectoryArrow.png" />
+      <img tabindex="0" class="slideshow-btn slideshow-right" src="/icons/FileDirectoryArrow.png" />
     </div>
+
     <div class="directions-wrap">
       <p>Directions:</p>
       <ul id="directionsList">
@@ -65,8 +68,27 @@
 </div>
 
 <div class="implementation-wrap">
-  <img id="implementationImg" src="" />
+  <span id="impSlideshowCounter"></span>
+
+  <div id="impSlideshowWrap" class="slideshow-wrap" data-page="1">
+    <img tabindex="0" class="slideshow-btn slideshow-left" src="/icons/FileDirectoryArrow.png" />
+    <img tabindex="0" class="slideshow-btn slideshow-right" src="/icons/FileDirectoryArrow.png" />
+  </div>
 </div>
 
 </body>
 </html>
+
+<section id="myPageContentId">
+
+</section>
+
+<section id="myModalId" class="screen-tint fade">
+  <div class="my-modal-class">
+    <div>My Modal Content</div>
+
+    <div class="close-btn" id="myCloseBtnId">
+      <div class="close-btn-wrap"><div></div><div></div></div>
+    </div>
+  </div>
+</section>
