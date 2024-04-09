@@ -152,6 +152,9 @@ label, h2, h3 {
   @include Flex-Row(center, center, 100%, initial);
   a, button, input[type=submit] {
     margin: 0vh 1vw;
+    @media (max-width: $bmaxLaptop) {
+      margin: 0vh 5vw;
+    }
   }
 }
 .btn {
