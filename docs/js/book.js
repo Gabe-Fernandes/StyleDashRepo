@@ -1,62 +1,4 @@
 $(function () {
-  const modalData = {
-    callbackUrl: "/docs/html/docs.html#modalsDiv",
-    title: "Modal",
-    description: "- A window that appears on screen with a fade transition",
-    visualSrc: "/codeImgs/modalVisual.gif",
-    reqCode: [`
-    &lt;section id=&quot;myPageContentId&quot;&gt;
-  
-    &lt;/section&gt;
-
-    &lt;section id=&quot;myModalId&quot; class=&quot;screen-tint fade&quot;&gt;
-      &lt;div class=&quot;my-modal-class&quot;&gt;
-
-        &lt;span&gt;My Modal Content&lt;/span&gt;
-
-        &lt;div class=&quot;close-btn&quot; id=&quot;myCloseBtnId&quot;&gt;
-          &lt;div class=&quot;close-btn-wrap&quot;&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;/div&gt;
-
-      &lt;/div&gt;
-    &lt;/section&gt;`,
-
-    `
-    .my-modal {
-      @include Modal("35vw", "50vh", black);
-    }`,
-
-    `
-    $("#myOpenModalBtnId").on("click", ()=> {
-      ToggleModal($("#myPageContentId"), $("#myModalId"), openModal);
-    });
-    
-    $("#myCloseBtnId").on("click", ()=> {
-      ToggleModal($("#myPageContentId"), $("#myModalId"), closeModal);
-    });`
-  ],
-    directions: ["create a section element with an id outside of your content with the screen-tint and fade classes", "create a div or form element to be the wrap for the modal itself and style it with @include Modal()", "use the provided close-btn html for a responsive X icon", "call ToggleModal() in JS to open/close the modal"],
-    implementationSrc: ["/codeImgs/modalLibSass0.PNG", "/codeImgs/modalLibSass1.PNG", "/codeImgs/modalLibSass2.PNG", "/codeImgs/modalLibJs.PNG"]
-  }
-  const hideData = {
-    callbackUrl: "/docs/html/docs.html#hideDiv",
-    title: "Hide",
-    description: "- Change the visibility of elements in various ways",
-    visualSrc: "/codeImgs/searchWrapVisual.PNG",
-    requirementsSrc: ["/codeImgs/searchWrapHtmlCode.PNG", "/codeImgs/searchWrapSassCode.PNG"],
-    directions: ["wrap an img element and an input element in a div", "selecting the div, include SearchDiv with arguments for font-size, width, and height"],
-    implementationSrc: ["/codeImgs/searchWrapLibSassCode.PNG"]
-  }
-  const searchWrapData = {
-    callbackUrl: "/docs/html/docs.html#searchWrapDiv",
-    title: "Search Wrap",
-    description: "- a textbox with an image (usually magnifying glass) in it",
-    visualSrc: "/codeImgs/searchWrapVisual.PNG",
-    requirementsSrc: ["/codeImgs/searchWrapHtmlCode.PNG", "/codeImgs/searchWrapSassCode.PNG"],
-    directions: ["wrap an img element and an input element in a div", "selecting the div, include SearchDiv with arguments for font-size, width, and height"],
-    implementationSrc: ["/codeImgs/searchWrapLibSassCode.PNG"]
-  }
-
   function populateData(data) {
     $("#backToDocs").attr("href", data.callbackUrl);
     $("#bookTitle").html(data.title);
@@ -86,10 +28,14 @@ $(function () {
       $("#directionsList").append(`<li>${data.directions[i]}</li>`);
     }
 
-    for (let i = 0; i < data.implementationSrc.length; i++) {
+    for (let i = 0; i < data.impCode.length; i++) {
       $("#impSlideshowWrap").append(`
         <div id="impSlideshow${i + 1}" class="imp slideshow-shrink">
-          <img src="${data.implementationSrc[i]}" />
+          <pre>
+            <code class="code-snip">
+              ${data.impCode[i]}
+            </code>
+          </pre>
         </div>
       `);
     }

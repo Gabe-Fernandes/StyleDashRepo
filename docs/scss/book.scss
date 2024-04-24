@@ -46,10 +46,6 @@
     border-radius: 0.5rem;
     transition: width 0.3s;
   }
-  .code-snip {
-    border-radius: 1rem;
-    box-shadow: 0.5rem 0.5rem 0.5rem black;
-  }
   pre {
     position: relative;
     .copy-btn {
@@ -93,6 +89,11 @@
   span {
     margin: 2vh 0vw;
   }
+}
+
+.code-snip {
+  border-radius: 1rem;
+  box-shadow: 0.5rem 0.5rem 0.5rem black;
 }
 
 // slideshow ---------------------------------------
