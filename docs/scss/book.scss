@@ -46,6 +46,21 @@
     border-radius: 0.5rem;
     transition: width 0.3s;
   }
+  .code-snip {
+    border-radius: 1rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem black;
+  }
+  pre {
+    position: relative;
+    .copy-btn {
+      @include Img-Round(3rem);
+      cursor: pointer;
+      position: absolute;
+      top: 0%;
+      right: 0%;
+      transition: filter 0.3s;
+    }
+  }
   .directions-wrap {
     @include Flex-Col(flex-start, center, 65%, initial);
     margin: 2vh 0vw;

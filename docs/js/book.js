@@ -4,7 +4,37 @@ $(function () {
     title: "Modal",
     description: "- A window that appears on screen with a fade transition",
     visualSrc: "/codeImgs/modalVisual.gif",
-    requirementsSrc: ["/codeImgs/modalReqHtml.PNG", "/codeImgs/modalReqSass.PNG", "/codeImgs/modalReqJs.PNG"],
+    reqCode: [`
+    &lt;section id=&quot;myPageContentId&quot;&gt;
+  
+    &lt;/section&gt;
+
+    &lt;section id=&quot;myModalId&quot; class=&quot;screen-tint fade&quot;&gt;
+      &lt;div class=&quot;my-modal-class&quot;&gt;
+
+        &lt;span&gt;My Modal Content&lt;/span&gt;
+
+        &lt;div class=&quot;close-btn&quot; id=&quot;myCloseBtnId&quot;&gt;
+          &lt;div class=&quot;close-btn-wrap&quot;&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/div&gt;
+
+      &lt;/div&gt;
+    &lt;/section&gt;`,
+
+    `
+    .my-modal {
+      @include Modal("35vw", "50vh", black);
+    }`,
+
+    `
+    $("#myOpenModalBtnId").on("click", ()=> {
+      ToggleModal($("#myPageContentId"), $("#myModalId"), openModal);
+    });
+    
+    $("#myCloseBtnId").on("click", ()=> {
+      ToggleModal($("#myPageContentId"), $("#myModalId"), closeModal);
+    });`
+  ],
     directions: ["create a section element with an id outside of your content with the screen-tint and fade classes", "create a div or form element to be the wrap for the modal itself and style it with @include Modal()", "use the provided close-btn html for a responsive X icon", "call ToggleModal() in JS to open/close the modal"],
     implementationSrc: ["/codeImgs/modalLibSass0.PNG", "/codeImgs/modalLibSass1.PNG", "/codeImgs/modalLibSass2.PNG", "/codeImgs/modalLibJs.PNG"]
   }
@@ -32,20 +62,30 @@ $(function () {
     $("#bookTitle").html(data.title);
     $("#bookDescription").html(data.description);
     $("#visualImg").attr("src", data.visualSrc);
-    $("#htmlImg").attr("src", data.htmlSrc);
-    $("#sassImg").attr("src", data.sassSrc);
-    $("#jsImg").attr("src", data.jsSrc);
-    for (let i = 0; i < data.requirementsSrc.length; i++) {
+
+    for (let i = 0; i < data.reqCode.length; i++) {
       $("#reqSlideshowWrap").append(`
       <div id="reqSlideshow${i + 1}" class="req slideshow-shrink">
-        <img src="${data.requirementsSrc[i]}" />
+        <pre>
+          <code id="codeEle${i}" class="code-snip">
+            ${data.reqCode[i]}
+          </code>
+          <img tabindex="0" src="/icons/copy.png" id="copyBtn${i}" class="copy-btn btn text-btn" />
+        </pre>
       </div>
     `);
+    $(`#copyBtn${i}`).on("click", ()=> {
+      const text = $(`#codeEle${i}`).text();
+      navigator.clipboard.writeText(text);
+    });
+    $(`#copyBtn${i}`).on("keypress", addKeyboardAccessibility);
     }
     $("#reqSlideshow1").removeClass("slideshow-shrink");
+
     for (let i = 0; i < data.directions.length; i++) {
       $("#directionsList").append(`<li>${data.directions[i]}</li>`);
     }
+
     for (let i = 0; i < data.implementationSrc.length; i++) {
       $("#impSlideshowWrap").append(`
         <div id="impSlideshow${i + 1}" class="imp slideshow-shrink">
@@ -54,6 +94,8 @@ $(function () {
       `);
     }
     $("#impSlideshow1").removeClass("slideshow-shrink");
+
+    hljs.highlightAll();
   }
 
   function getBookData(bookId) {
@@ -105,12 +147,3 @@ $(function () {
   createSlideShow("req");
   createSlideShow("imp");
 });
-
-
-// $("#myOpenModalBtnId").on("click", ()=>{
-//   ToggleModal($("#myPageContentId"), $("#myModalId"), openModal);
-// });
-
-// $("#myCloseBtnId").on("click", ()=>{
-//   ToggleModal($("#myPageContentId"), $("#myModalId"), closeModal);
-// });
