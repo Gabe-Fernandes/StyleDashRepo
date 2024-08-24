@@ -49,6 +49,15 @@ $(function () {
       case "0": populateData(modalData); return;
       case "1": populateData(hideData); return;
       case "2": populateData(searchWrapData); return;
+      case "3": populateData(tableData); return;
+      case "4": populateData(dropdownCustomOptionData); return;
+      case "5": populateData(statusIconsData); return;
+      case "6": populateData(confWrapData); return;
+      case "7": populateData(readEditToggleData); return;
+      case "8": populateData(formValidationData); return;
+      case "9": populateData(navBarData); return;
+      case "10": populateData(passwordToggleData); return;
+      case "11": populateData(paginatedPanelsData); return;
     }
   }
 
