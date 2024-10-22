@@ -176,11 +176,13 @@ function switchFromEditToRead(target) {
 $(".edit-btn").on("click", (event) => {
   switchFromReadToEdit($(event.target));
   $(event.target).addClass("fade-abs");
+  $(event.target).siblings(".cancel-edit-btn:first").removeClass("fade-abs");
 });
 
 $(".cancel-edit-btn").on("click", (event) => {
   switchFromEditToRead($(event.target));
-  $(event.target).removeClass("fade-abs");
+  $(event.target).addClass("fade-abs");
+  $(event.target).siblings(".edit-btn:first").removeClass("fade-abs");
 });
 
 // =========================================================== Navigation Menu ===========================================================
