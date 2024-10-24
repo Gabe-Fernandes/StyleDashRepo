@@ -164,25 +164,25 @@ function paginate(namespace, leftBtnId, rightBtnId) {
 // =========================================================== Read/Edit Swap ===========================================================
 
 function switchFromReadToEdit(target) {
-  target.parents(".toggle-read-edit").find(".read-data").addClass("fade-abs");
-  target.parents(".toggle-read-edit").find(".edit-data").removeClass("fade-abs");
+  target.parents(".toggle-read-edit:first").find(".read-data").addClass("fade-abs");
+  target.parents(".toggle-read-edit:first").find(".edit-data").removeClass("fade-abs");
 }
 
 function switchFromEditToRead(target) {
-  target.parents(".toggle-read-edit").find(".read-data").removeClass("fade-abs");
-  target.parents(".toggle-read-edit").find(".edit-data").addClass("fade-abs");
+  target.parents(".toggle-read-edit:first").find(".read-data").removeClass("fade-abs");
+  target.parents(".toggle-read-edit:first").find(".edit-data").addClass("fade-abs");
 }
 
 $(".edit-btn").on("click", (event) => {
   switchFromReadToEdit($(event.target));
   $(event.target).addClass("fade-abs");
-  $(event.target).siblings(".cancel-edit-btn:first").removeClass("fade-abs");
+  $(event.target).parents(".toggle-read-edit:first").find(".cancel-edit-btn:first").removeClass("fade-abs");
 });
 
 $(".cancel-edit-btn").on("click", (event) => {
   switchFromEditToRead($(event.target));
   $(event.target).addClass("fade-abs");
-  $(event.target).siblings(".edit-btn:first").removeClass("fade-abs");
+  $(event.target).parents(".toggle-read-edit:first").find(".edit-btn:first").removeClass("fade-abs");
 });
 
 // =========================================================== Navigation Menu ===========================================================
