@@ -100,6 +100,10 @@ const tableData = {
     table{
       width: 100%;
       border-collapse: collapse;
+      thead {
+        position: sticky;
+        top: 0%;
+      }
       th{
         padding: 1rem;
         background-color: $cHead;
