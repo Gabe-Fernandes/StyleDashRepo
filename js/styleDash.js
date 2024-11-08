@@ -312,7 +312,7 @@ $(".mobile-nav-btn").on("click", () => {
   }
 });
 
-// =========================================================== Table Features ===========================================================
+// =========================================================== Table Sorting ===========================================================
 
 function thSortEvent(tbody, directionFlag, nameSpace, tdSortClass, sortingFunction) {
   const rowCount = $(`#${tbody}`).children().length;
@@ -400,5 +400,57 @@ function abbreviatedMonthToInt(abbreviatedMonth) {
     case "Oct": return 10;
     case "Nov": return 11;
     case "Dec": return 12;
+  }
+}
+
+// =========================================================== Table Filtering ===========================================================
+
+function searchFilter(nameSpace, filters, toggleFilter, firstLast = false) {
+  // store values before filtering
+  const filterString = ($(`#${nameSpace}Filter`).val()).toLowerCase();
+  let showToggleRecords = false;
+  if ($(`#${nameSpace}Checkbox`).length) {
+    showToggleRecords = $(`#${nameSpace}Checkbox`).is(":checked");
+  }
+  const color0 = $(`.${nameSpace}-table-wrap:first`).find("tbody:first").find("tr:first").css("background-color");
+  const color1 = $(`.${nameSpace}-table-wrap:first`).css("background-color");
+  let colorToggle = 0;
+  const numOfRows = $(`.${nameSpace}-row`).length;
+
+  // iterate through each tr
+  loopi: for (let i = 0; i < numOfRows; i++) {
+    const tr = $(`#${nameSpace}TR_${i}`);
+
+    // store all searchable values in an array. Store separate names as [FirstName + " " + LastName] so that full names are searchable
+    let searchableTextValues = [];
+    let fullName = "";
+    for (let j = 0; j < filters.length; j++) {
+      const textValue = tr.find(`.filter${filters[j]}:first`).attr(`data-${filters[j]}`).toLowerCase();
+      if (firstLast && filters[j] === "FirstName") { fullName += textValue + " "; continue; }
+      if (firstLast && filters[j] === "LastName") { fullName += textValue; continue; }
+      searchableTextValues.push(textValue);
+    }
+    if (firstLast) { searchableTextValues.push(fullName); }
+
+    // hide toggle rows if the toggle is off
+    const toggleStatus = tr.find(`.filter${toggleFilter}:first`).attr(`data-${toggleFilter}`);
+    if (showToggleRecords === false && toggleStatus === "False") {
+      tr.addClass("hide");
+      continue loopi;
+    }
+
+    // check if the filter string is in any of the searchable text values to reveal found rows
+    for (let j = 0; j < searchableTextValues.length; j++) {
+      if (searchableTextValues[j].includes(filterString)) {
+        tr.removeClass("hide");
+        // force the striped pattern because hidden tr's disrupt this
+        const colorToUse = (colorToggle === 0) ? color0 : color1;
+        tr.css("background-color", colorToUse);
+        colorToggle = (colorToggle === 0) ? 1 : 0;
+        continue loopi;
+      }
+    }
+    // hide unfound rows
+    tr.addClass("hide");
   }
 }
