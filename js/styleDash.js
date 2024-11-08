@@ -314,13 +314,16 @@ $(".mobile-nav-btn").on("click", () => {
 
 // =========================================================== Table Features ===========================================================
 
-function thSortEvent(tbody, directionFlag, rowNamespace, tdSortClass, sortingFunction) {
+function thSortEvent(tbody, directionFlag, nameSpace, tdSortClass, sortingFunction) {
   const rowCount = $(`#${tbody}`).children().length;
+  const color0 = $(`.${nameSpace}-table-wrap:first`).find("tbody:first").find("tr:first").css("background-color");
+  const color1 = $(`.${nameSpace}-table-wrap:first`).css("background-color");
+  let colorToggle = 0;
 
   // sort content
   let sortedRows = [];
   for (let i = 0; i < rowCount; i++) {
-    const row = $(`#${rowNamespace}_${i}`)
+    const row = $(`#${nameSpace}_${i}`)
     const rowText = row.children(`.${tdSortClass}`).html();
     const rowObj = { row: row, rowText: rowText };
     sortedRows = positionRowInCollection(sortedRows, rowObj, sortingFunction);
@@ -330,6 +333,10 @@ function thSortEvent(tbody, directionFlag, rowNamespace, tdSortClass, sortingFun
   const appendDirection = directionFlag ? "append" : "prepend";
   for (let i = 0; i < rowCount; i++) {
     $(`#${tbody}`)[appendDirection](sortedRows[i].row);
+    // force the striped pattern because reordered tr's disrupt this
+    const colorToUse = (colorToggle === 0) ? color0 : color1;
+    sortedRows[i].row.css("background-color", colorToUse);
+    colorToggle = (colorToggle === 0) ? 1 : 0;
   }
   return !directionFlag;
 }
