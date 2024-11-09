@@ -412,10 +412,10 @@ function searchFilter(nameSpace, filters, toggleFilter, firstLast = false) {
   if ($(`#${nameSpace}Checkbox`).length) {
     showToggleRecords = $(`#${nameSpace}Checkbox`).is(":checked");
   }
-  const color0 = $(`.${nameSpace}-table-wrap:first`).find("tbody:first").find("tr:first").css("background-color");
-  const color1 = $(`.${nameSpace}-table-wrap:first`).css("background-color");
+  const color0 = $(`.${nameSpace}-table-wrap:first`).css("background-color");
+  const color1 = $(`.${nameSpace}-table-wrap:first`).children("table:first").css("background-color");
   let colorToggle = 0;
-  const numOfRows = $(`.${nameSpace}-row`).length;
+  const numOfRows = $(`#${nameSpace}Tbody`).children().length;
 
   // iterate through each tr
   loopi: for (let i = 0; i < numOfRows; i++) {

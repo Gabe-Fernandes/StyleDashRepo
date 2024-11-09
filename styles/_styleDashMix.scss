@@ -205,8 +205,10 @@ $cPlaceholder: #0000;
   @include WidthHeight($w, $h);
   display: block;
   border-radius: 0.5rem;
-  background-color: $c1;
+  background-color: $c2;
   transition: width 0.3s;
+  margin: 0% auto;
+  border: solid 1px black;
 
   @if $hideScroll{
     overflow: hidden;
@@ -219,6 +221,7 @@ $cPlaceholder: #0000;
   table{
     width: 100%;
     border-collapse: collapse;
+    background-color: $c1;
     thead {
       position: sticky;
       top: 0%;
