@@ -434,7 +434,7 @@ function searchFilter(nameSpace, filters, toggleFilter, firstLast = false) {
 
     // hide toggle rows if the toggle is off
     const toggleStatus = tr.find(`.filter${toggleFilter}:first`).attr(`data-${toggleFilter}`);
-    if (showToggleRecords === false && toggleStatus === "False") {
+    if (showToggleRecords === false && toggleStatus.toLowerCase() === "false") {
       tr.addClass("hide");
       continue loopi;
     }
